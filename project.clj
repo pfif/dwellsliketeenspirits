@@ -3,13 +3,15 @@
                  [org.clojure/clojurescript "1.10.238"]
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
-                 [secretary "1.2.3"]]
+                 [secretary "1.2.3"]
+                 [image-resizer "0.1.10"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 
   :min-lein-version "2.5.3"
 
   :source-paths ["src/clj" "src/cljs"]
+  :test-paths ["test/clj"]
 
   :clean-targets ^{:protect false} ["resources/public/js/compiled" "target"]
 
