@@ -1,0 +1,4 @@
+(ns dwellsliketeenspirits.db)
+
+(def default-db
+  {:name "re-frame"})
