@@ -19,6 +19,8 @@
 
   :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}
 
+  :aliases {"compile-book" ["run" "-m" "cornelius-reader.compiler/compile-book-from-repo!"]}
+
   :profiles
   {:dev
    {:dependencies [[binaryage/devtools "0.9.10"]
