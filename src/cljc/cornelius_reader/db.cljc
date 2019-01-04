@@ -1,6 +1,7 @@
-(ns .cornelius-reader.db
+(ns cornelius-reader.db
   (:require [clojure.spec.alpha :as s]))
 
+;; Compiled book
 (s/def ::compiled-page-filename (s/and string? #(re-matches #"c[0-9]+p[0-9]")))
 (s/def ::chapter-name string?)
 (s/def ::page-progression (s/and string? #(re-matches #"[0-9]+/[0-9]+")))
@@ -14,4 +15,8 @@
 
 (s/def ::compiled-book (s/tuple ::pages ::chapters))
 
-(s/def ::db (s/keys :req [::compiled-book]))
+;; UI state
+(s/def ::current-page-reference int?)
+
+;; Database
+(s/def ::db (s/keys :req [::compiled-book ::current-page-reference]))
