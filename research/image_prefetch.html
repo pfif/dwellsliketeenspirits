@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image prefetch test</title>
+        <style>
+         .prefetch{
+             display: none;
+         }
+        </style>
+    </head>
+    <body>
+        <img src="image1.png" srcset="image1.png 1x, image1-2x.png 2x"/>
+        <img src="image2.png" srcset="image2.png 1x, image2-2x.png 2x" class="prefetch"/>
+        <img src="image3.png" srcset="image3.png 1x, image3-2x.png 2x" class="prefetch"/>
+    </body>

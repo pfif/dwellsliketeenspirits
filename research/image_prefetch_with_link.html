@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image prefetch with Link</title>
+        <script>
+         function addLinkToHeader(){
+             var link2 = document.createElement('link');
+             link2.rel = "preload"
+             link2.href = "image2.png"
+             link2.as = "image"
+             document.head.appendChild(link2);
+
+             var link3 = document.createElement('link');
+             link3.rel = "preload"
+             link3.href = "image3.png"
+             link3.as = "image"
+             document.head.appendChild(link3);
+         }
+        </script>
+    </head>
+    <body>
+        <button onclick="addLinkToHeader()">HELLO!</button>
+    </body>
+</html>
