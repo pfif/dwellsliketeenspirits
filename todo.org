@@ -1,7 +1,0 @@
-* TODO Next pieces of code
-** Event for initialisation
-** Event for download
-** Event for page refresh
-* Research
-** How to preload images
-Use link rel

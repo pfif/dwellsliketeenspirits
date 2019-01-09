@@ -4,7 +4,8 @@
                  [reagent "0.7.0"]
                  [re-frame "0.10.5"]
                  [secretary "1.2.3"]
-                 [image-resizer "0.1.10"]]
+                 [image-resizer "0.1.10"]
+                 [funcool/cuerdas "2.0.5"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]]
 

@@ -1,3 +1,4 @@
+;; TODO This compiler overlaps with compiled-book-reader. The role of both should be specified.
 (ns cornelius-reader.compiler
   (:require [clojure.string :as str]
             [clojure.java.io :refer [file]]
@@ -20,7 +21,7 @@
    (map #(assoc % 2 (add-page-progression (nth % 2))))
    (map (fn [[chap-i chap pages]] (map (fn
                                          [[page-i page-filename page-progression]]
-                                         [(str "c" chap-i "p" page-i) chap page-progression chap-i page-filename])
+                                         [(str "c" chap-i "p" page-i) chap page-progression chap-i page-filename page-i])
                                        pages)))
    (reduce concat)))
 

@@ -40,12 +40,17 @@
         (is (= (map #(nth % 3) compiled-pages) [1 1
                                                 2 2 2])))
       (testing "the chapters are returned"
-        (is (= compiled-chapters ["PJ Jone's Diary" "Chickens and Cauldrons"]))))))
+        (is (= compiled-chapters ["PJ Jone's Diary" "Chickens and Cauldrons"])))
+
+      (testing "the page numbers are returned"
+        (is (= (map #(nth % 5) compiled-pages)
+               [1 2
+                1 2 3]))))))
 
 
-(def sample-compiled-pages '(["c1p1" "PJ Jone's Diary" "1/1" 1 "dlts-chap1-page1.jpg"]
-                            ["c2p1" "Chickens and Cauldrons" "1/2" 2 "dlts-chap2-page1.jpg"]
-                            ["c2p2" "Chickens and Cauldrons" "2/2" 2 "dlts-chap2-page2.jpg"]))
+(def sample-compiled-pages '(["c1p1" "PJ Jone's Diary" "1/1" 1 "dlts-chap1-page1.jpg" 1]
+                            ["c2p1" "Chickens and Cauldrons" "1/2" 2 "dlts-chap2-page1.jpg" 1]
+                            ["c2p2" "Chickens and Cauldrons" "2/2" 2 "dlts-chap2-page2.jpg" 2]))
 
 (deftest resize-image-specs
   (testing "it returns correct specs for resized images with"
