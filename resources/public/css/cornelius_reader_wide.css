@@ -1,0 +1,35 @@
+.cornelius_reader{
+    grid-template-columns:  1fr
+                                8px
+                                30px
+                                calc((21/29.7) * 100vh)
+                                30px
+                                8px
+                                1fr;
+    grid-template-rows:  1fr
+                             20px
+                             30px
+                             5px
+                             15px
+                             1fr;
+}
+
+.cornelius_reader.page-metadata-mode{
+    grid-template-areas:
+    ". previous-button . page . following-button ."
+        ". previous-button . page . following-button chapter-number"
+        ". previous-button . page . following-button chapter-name"
+        ". previous-button . page . following-button ."
+        ". previous-button . page . following-button chapter-page-progression"
+        ". previous-button . page . following-button .";
+}
+
+.cornelius_reader.chapters-list-mode{
+    grid-template-areas:
+    ". previous-button . page . following-button chapters"
+        ". previous-button . page . following-button chapters"
+        ". previous-button . page . following-button chapters"
+        ". previous-button . page . following-button chapters"
+        ". previous-button . page . following-button chapters"
+        ". previous-button . page . following-button chapters";
+}

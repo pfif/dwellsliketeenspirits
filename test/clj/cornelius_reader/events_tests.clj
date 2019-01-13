@@ -16,17 +16,18 @@
                "https://asset.example.com"))))))
 
 (deftest compiled-book-ready
-  (testing "After the compiled book signaled as ready, the resulting DB contains"
-    (let [result (tested/compiled-book-ready {:another-thing "value"} [:compiled-book-ready [:pages :chapter]])]
-      (testing "the compiled-book that is passed"
-        (is (= (get result :cornelius-reader.db/compiled-book)
-               [:pages :chapter])))
-      (testing "a reference to the first page"
-        (is (= (get result :cornelius-reader.db/current-page-reference)
-               0)))
-      (testing "what was in the DB when it was passed"
-        (is (= (get result :another-thing)
-               "value"))))))
+  (testing "After the compiled book signaled as ready, "
+    (let [result (tested/compiled-book-ready {:db {:another-thing "value"}} [:compiled-book-ready [:pages :chapter]])
+          db (:db result)]
+      (testing "the resulting DB contains"
+        (testing "the compiled-book that is passed"
+          (is (= (get db :cornelius-reader.db/compiled-book)
+                 [:pages :chapter])))
+        (testing "what was in the DB when it was passed"
+          (is (= (get db :another-thing)
+                 "value"))))
+      (testing "the changed-page signal queued"
+        (is (= (:dispatch result) [:cornelius-reader.events/changed-page]))))))
 
 (def sample-paths-for-all-pages ["/pj-jones-diary/1/" "/chickens-and-cauldrons/1/" "/chickens-and-cauldrons/2/"])
 (def sample-paths-for-all-chapters ["/pj-jones-diary/" "/chickens-and-cauldrons/"])

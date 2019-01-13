@@ -84,4 +84,4 @@
 
 (defn compile-book-from-repo!
   []
-  (compile-book! "book" "compiled-book"))
+  (compile-book! "book" "resources/public/compiled-book"))

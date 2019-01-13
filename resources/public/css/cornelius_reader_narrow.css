@@ -1,0 +1,36 @@
+.cornelius_reader{
+    grid-template-rows: 0.5fr
+                            20px
+                            30px
+                            0.5fr
+                            calc((29.7/21) * 100vw)
+                            0.5fr
+                            15px
+                            0.5fr;
+    grid-template-columns: 1fr
+                              8px
+                              10px
+                              auto
+                              8px
+                              10px
+                               1fr;
+    grid-template-areas:
+    ". . . . . . ."
+        "chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
+        "chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
+        ". . . . . . ."
+        "page page page page page page page"
+        ". . . . . . ."
+        ". previous-button . chapter-page-progression . following-button ."
+        ". . . . . . ."
+}
+
+.cornelius_reader .chapters{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}

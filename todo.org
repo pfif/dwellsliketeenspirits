@@ -1,0 +1,59 @@
+* Tech debt
+** TODO Make it consider URLs without trailing slash"
+** TODO Unit test the behaviour of this function. Or break it down if it makes more sense.
+  (Maybe the target path should always be provided (it could be provided by another event, like compiled-book-ready))
+  Also this would allow to actually add the page to the browser history instead of replacing it. (You have one event that changes the state and another one that corrects it)"
+** TODO General code health
+*** src/cljc/cornelius_reader/events.cljc:69:        TODO don't redefine function name
+*** src/cljs/dwellsliketeenspirits/core.cljs:29:  ;; TODO : Extract this fetcher
+** TODO For now the loading of objects in reframe is done in imports. This is a bit crap and side effect-y
+** TODO Centralize the list of size
+** TODO This compiler overlaps with compiled-book-reader. The role of both should be specified.
+** TODO (starts-with? (:uri request) "/compiled-book/")) ;; TODO delete this from prod envs
+* Features requiring few design
+** Background color changes with page
+** Next chapter/coming soon
+** Teaser for next chapter
+** RSS feeds
+** Create manual tests
+* Features for lunch (CRAM THROUGH IT)
+** DONE Push a new event when changing page, replace when sanitizing url
+** DONE Basic design for wide screeu
+** DONE Basic design for narrow screens
+** DONE Basic skin for loading screen
+** DONE Show chapters
+** TODO Add indication that "Chapters" is a menu
+** TODO Adaptive images
+** TODO Preload/Prefetch images
+** TODO Navigate with scroll
+** TODO Navigate with arrows
+** TODO Navigate with touch
+** TODO Hide buttons when they are not usable
+** TODO Add a menu (with a fake about page)
+** TODO Placeholder page!
+** TODO Add the events that hides/shows the UI when the interface is too slow (Alternative : make A4 page smaller | announce that it is a known problem)
+** TODO Google Analytics
+** TODO Remove "push event"
+* Feature waiting on other people
+** About page
+** Drawn teaser for the next chapter
+** Skin for special occasion
+** Basic design for wide screen
+** Basic design for narrow screens
+* Features requiring proper design
+** I18n
+** Meta tags for better referencing
+** Meta tags for social graph
+** meta tags for "semantic referencing"
+** Allow people to register interest in cornelius reader
+** The CMS
+** Mini dwells (being able to insert a chapter that is not numbered)
+** Gather needs for system monitoring
+** Add copyright
+** Add patreon/instragram ...
+** Advertising
+** Checkout how caching works
+** System tests
+** Fill the page with loads of semantic HTML5 swag
+* Technical test
+** Build website using only HTML and CSS (check if the experience can be as good)

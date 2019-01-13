@@ -1,11 +1,8 @@
 (ns dwellsliketeenspirits.config)
 
-#?(:cljs (def debug? ^boolean goog.DEBUG)
-   :clj (def debug? true))
+(def debug? ^boolean goog.DEBUG)
 
-(def asset_server
+(def asset-server-url
   (if debug?
-    "http://127.0.0.1/assets"
-    "http://assets.dwellsliketeenspirits.com"))
-
-
+    "http://127.0.0.1:3449/compiled-book"
+    "http://storage.googleapis.com/dwellsliketeenspirits-data"))

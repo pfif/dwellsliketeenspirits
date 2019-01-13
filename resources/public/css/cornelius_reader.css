@@ -1,0 +1,110 @@
+/* General display */
+
+/* Layout */
+.cornelius_reader{
+    width: 100vw;
+    height: 100vh;
+    display: grid;
+}
+
+.cornelius_reader .page {
+    grid-area: page;
+    place-self: stretch;
+}
+
+.cornelius_reader .following_page, .cornelius_reader .previous_page{
+    place-self: center;
+}
+.cornelius_reader .following_page{
+    grid-area: following-button;
+}
+
+.cornelius_reader .previous_page{
+    grid-area: previous-button;
+}
+
+.cornelius_reader .chapter_number, .cornelius_reader .chapter_name,.cornelius_reader .chapter_page_progression {
+    place-self: center;
+}
+
+.cornelius_reader .chapter_number{
+    grid-area: chapter-number;
+}
+
+.cornelius_reader .chapter_name{
+    grid-area: chapter-name;
+}
+
+.cornelius_reader .chapter_page_progression{
+    grid-area: chapter-page-progression;
+}
+
+/* Page metadata */
+.cornelius_reader.chapters-list-mode .page_metadata{
+    display: none;
+}
+.cornelius_reader .page_metadata{
+    color: white;
+}
+
+.cornelius_reader .chapter_number{
+    font-size: 20px;
+}
+
+.cornelius_reader .chapter_name{
+    font-size: 30px;
+}
+
+.cornelius_reader .chapter_page_progression{
+    font-size: 15px;
+    margin-top: 10px;
+}
+
+/* Chapters list */
+.cornelius_reader.page-metadata-mode .chapters{
+    display: none;
+}
+
+.cornelius_reader .chapters{
+    grid-area: chapters;
+    display: grid;
+
+    grid-template-columns: 1fr auto;
+    grid-template-areas: "chapters close-button";
+}
+
+.cornelius_reader .chapters ul{
+    grid-area: chapters;
+}
+
+
+.cornelius_reader .chapters button{
+    grid-area: close-button;
+    align-self: start;
+    color: white;
+    background-color: black;
+}
+
+/* Buttons */
+.cornelius_reader .following_page{
+    transform:rotate(180deg);
+}
+
+.cornelius_reader .link-button{
+    background-image: url("/images/change_page_button.svg");
+
+    background-size-width: 8px;
+    background-size-height: 26px;
+    width: 8px;
+    height: 26px;
+}
+
+.cornelius_reader .link-button span{
+    display: none;
+}
+
+.cornelius_reader .loading_screen{
+    grid-area: page;
+    place-self: center;
+    color: white;
+}
