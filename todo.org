@@ -22,8 +22,8 @@
 ** DONE Basic design for narrow screens
 ** DONE Basic skin for loading screen
 ** DONE Show chapters
-** TODO Add indication that "Chapters" is a menu
-** TODO Adaptive images
+** DONE Add indication that "Chapters" is a menu
+** DONE Adaptive images
 ** TODO Preload/Prefetch images
 ** TODO Navigate with scroll
 ** TODO Navigate with arrows

@@ -110,7 +110,7 @@
  following-page-path)
 
 (reg-sub
- ::current-page-url-start
+ ::current-page-url-beginning
  :<- [::current-page]
  :<- [::asset-server]
  (fn

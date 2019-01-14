@@ -1,16 +1,7 @@
 (ns cornelius-reader.views
   (:require [re-frame.core :refer [subscribe dispatch]]
-            [clojure.string :as str]
-            [cornelius-reader.subs :as subs])) ;; TODO improve loading of objects
-
-
-
-(defn srcset-for-current-image
-  "Returns the value for srcset that informs the browser of all the compiled images that exists."
-  [image-url-start]
-  (->
-   (map #(str image-url-start "-" % ".png " % "w") [450 675 800 1200 1600 2018]) ;; TODO Centralize these values
-   (str/join ",")))
+            [cornelius-reader.subs :as subs]
+            [cornelius-reader.responsive-image-helper :refer [srcset compiled-image-sizes sizes]]))
 
 (defn loading
   []
@@ -37,7 +28,7 @@
 (defn reader
   []
   (let [previous-page-path @(subscribe [:cornelius-reader.subs/previous-page-path])
-        current-page-image-url-start @(subscribe [:cornelius-reader.subs/current-page-url-start])
+        current-page-image-url-beginning @(subscribe [:cornelius-reader.subs/current-page-url-beginning])
         following-page-path @(subscribe [:cornelius-reader.subs/following-page-path])
         chapter-number @(subscribe [:cornelius-reader.subs/current-chapter-number])
         chapter-name @(subscribe [:cornelius-reader.subs/current-chapter-name])
@@ -46,7 +37,9 @@
         ]
     [:div.cornelius_reader {:class current-ui-mode-class}
      [change-page-link "previous_page link-button" previous-page-path "Page precedante"]
-     [:img.page {:src (str current-page-image-url-start "-450.png")}]
+     [:img.page {:src (str current-page-image-url-beginning "-2018.png")
+                 :srcSet (srcset current-page-image-url-beginning compiled-image-sizes)
+                 :sizes (sizes compiled-image-sizes)}]
      [change-page-link "following_page link-button" following-page-path "Page suivante"]
      [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
      [:p.chapter_name.page_metadata chapter-name]
