@@ -73,14 +73,7 @@
  (fn [chapters]
    (map-indexed (fn [i chapter] [(str (inc i) ". " chapter) (chapter-to-path chapter)]) chapters)))
 
-;; Level 3.2 subscription : any materialized state based on a value derived from the compiled-book and another value
-
-(reg-sub
- ::current-page
- :<- [::paths-to-pages]
- :<- [::current-path]
- (fn [[paths-to-pages current-path] _]
-   (get paths-to-pages current-path)))
+;; Level 3.2 subscription : Determines previous/following path (current just need to be fetched at level 2)
 
 (defn previous-page-path
   [[path paths] _]
@@ -109,13 +102,53 @@
  :<- [::paths]
  following-page-path)
 
+;; Level 3.3 : Determining pages
+
+(defn page
+  [[paths-to-pages path] _]
+  (get paths-to-pages path))
+
+(reg-sub
+ ::current-page
+ :<- [::paths-to-pages]
+ :<- [::current-path]
+ page)
+
+(reg-sub
+ ::previous-page
+ :<- [::paths-to-pages]
+ :<- [::previous-page-path]
+ page)
+
+(reg-sub
+ ::following-page
+ :<- [::paths-to-pages]
+ :<- [::following-page-path]
+ page)
+
+;; Level 3.4 : Data based on the previous/current/following page or the current
+
+(defn page-url-beginning
+  [[asset-server current-page] _]
+  (str asset-server "/" (get current-page 0)))
+
 (reg-sub
  ::current-page-url-beginning
- :<- [::current-page]
  :<- [::asset-server]
- (fn
-   [[current-page asset-server] _]
-   (str asset-server "/" (get current-page 0))))
+ :<- [::current-page]
+ page-url-beginning)
+
+(reg-sub
+ ::previous-page-url-beginning
+ :<- [::asset-server]
+ :<- [::previous-page]
+ page-url-beginning)
+
+(reg-sub
+ ::following-page-url-beginning
+ :<- [::asset-server]
+ :<- [::following-page]
+ page-url-beginning)
 
 (reg-sub
  ::current-chapter-number
@@ -134,5 +167,3 @@
  :<- [::current-page]
  (fn [current-page _]
    (get current-page 2)))
-
-

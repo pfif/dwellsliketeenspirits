@@ -10,21 +10,48 @@
    (map #(str image-url-beginning "-" % ".png " % "w") image-sizes)
    (str/join ",")))
 
+(defn a4-height
+  [a4-width]
+  (-> (/ 297 210) (* a4-width) (int)))
+
 (defn media-query-for-wide-screen
   [image-width]
-  (let [image-height (-> (/ 297 210) (* image-width) (int))]
-    (str "(min-aspect-ratio: 210/297) and (max-height: " image-height "px) " image-width "px")))
+  (let [image-height (a4-height image-width)]
+    [(str "(min-aspect-ratio: 210/297) and (max-height: " image-height "px)") image-width]))
 
 (defn media-query-for-narrow-screen
   [image-width]
-  (str "(max-aspect-ratio: 210/297) and (max-width: " image-width "px) " image-width "px"))
+  [(str "(max-aspect-ratio: 210/297) and (max-width: " image-width "px)") image-width])
+
+(defn last-media-query-for-wide-screen
+  [image-width]
+  (let [image-height (a4-height image-width)]
+    [(str "(min-aspect-ratio: 210/297) and (min-height: " image-height "px)") image-width]))
+
+(defn last-media-query-for-narrow-screen
+  [image-width]
+  [(str "(max-aspect-ratio: 210/297) and (min-width: " image-width "px)") image-width])
 
 (defn sizes
   "Returns the value for the size parameter"
   [image-sizes]
-  (let [computed-sizes (->
-                        (map media-query-for-wide-screen (butlast image-sizes))
-                        (concat (map media-query-for-narrow-screen (butlast image-sizes)))
-                        (concat [(str (last image-sizes) "px")]))]
-       (str/join "," computed-sizes)
-       ))
+  (str/join "," (->
+                 (map (fn [[media-query size]] (str media-query " " size "px")) image-sizes)
+                 (concat [(str (-> image-sizes last last) "px")]))))
+
+(defn media-queries-and-sizes
+  [image-sizes]
+  (->
+   (map media-query-for-wide-screen (butlast image-sizes))
+   (concat [(last-media-query-for-wide-screen (last image-sizes))])
+   (concat (map media-query-for-narrow-screen (butlast image-sizes)))
+   (concat [(last-media-query-for-narrow-screen (last image-sizes))])))
+
+;; Unused for now as browser are not ready. The final version will use another type of link preload
+;; https://github.com/whatwg/html/pull/4048
+(defn links-preload
+  [image-url-beginning media-queries]
+  (mapcat (fn [[media-query size]]
+            (let [image-url (str image-url-beginning "-" size ".png")]
+              [[:link {:rel "preload" :href image-url :as "image" :media media-query}]]))
+          media-queries))
