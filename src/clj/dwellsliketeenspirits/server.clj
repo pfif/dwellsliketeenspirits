@@ -1,6 +1,8 @@
 (ns dwellsliketeenspirits.server
   (:require [clojure.string :refer [starts-with?]]
-            [ring.middleware.resource :refer [wrap-resource]]))
+            [ring.middleware.resource :refer [wrap-resource]]
+            [ring.middleware.content-type :refer [wrap-content-type]]
+))
 
 (defn- wrap-default-index [next-handler]
   (fn [request]
@@ -15,4 +17,5 @@
 (def handler
   (-> (fn [_] {:status 404 :body "static asset not found"})
       (wrap-resource "public")
-      wrap-default-index))
+      (wrap-content-type)
+      (wrap-default-index)))
