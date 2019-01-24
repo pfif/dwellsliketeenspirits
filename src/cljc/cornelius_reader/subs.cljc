@@ -1,6 +1,6 @@
 (ns cornelius-reader.subs
   (:require [re-frame.core :refer [reg-sub]]
-            [cornelius-reader.compiled-book-reader :refer [map-paths-to-pages chapter-to-path]]))
+            [cornelius-reader.compiled-book-reader :refer [map-paths-to-pages chapter-to-path page page-url-beginning page]]))
 
 ;; Level two subscriptions
 ;; TODO turn all of these into one
@@ -27,6 +27,12 @@
  (fn
    [db _]
    (get db :cornelius-reader.db/showing-chapters-list)))
+
+(reg-sub
+ ::showing-placeholder
+ (fn
+   [db _]
+   (get db :cornelius-reader.db/showing-placeholder)))
 
 ;; Level 3
 
@@ -104,51 +110,51 @@
 
 ;; Level 3.3 : Determining pages
 
-(defn page
+(defn page-for-subs
   [[paths-to-pages path] _]
-  (get paths-to-pages path))
+  (page paths-to-pages path))
 
 (reg-sub
  ::current-page
  :<- [::paths-to-pages]
  :<- [::current-path]
- page)
+ page-for-subs)
 
 (reg-sub
  ::previous-page
  :<- [::paths-to-pages]
  :<- [::previous-page-path]
- page)
+ page-for-subs)
 
 (reg-sub
  ::following-page
  :<- [::paths-to-pages]
  :<- [::following-page-path]
- page)
+ page-for-subs)
 
 ;; Level 3.4 : Data based on the previous/current/following page or the current
 
-(defn page-url-beginning
+(defn page-url-beginning-for-subs
   [[asset-server current-page] _]
-  (str asset-server "/" (get current-page 0)))
+  (page-url-beginning asset-server current-page))
 
 (reg-sub
  ::current-page-url-beginning
  :<- [::asset-server]
  :<- [::current-page]
- page-url-beginning)
+ page-url-beginning-for-subs)
 
 (reg-sub
  ::previous-page-url-beginning
  :<- [::asset-server]
  :<- [::previous-page]
- page-url-beginning)
+ page-url-beginning-for-subs)
 
 (reg-sub
  ::following-page-url-beginning
  :<- [::asset-server]
  :<- [::following-page]
- page-url-beginning)
+ page-url-beginning-for-subs)
 
 (reg-sub
  ::current-chapter-number

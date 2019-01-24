@@ -19,9 +19,10 @@
 ;; UI state
 (s/def ::current-path (s/nilable (s/and string? #(re-matches #"/[a-z-]+/[0-9]+/" %))))
 (s/def ::showing-chapters-list boolean?)
+(s/def ::showing-placeholder boolean?)
 
 ;; Configuration
 (s/def ::asset-server string?)
 
 ;; Database
-(s/def ::db (s/keys :req [::compiled-book ::current-path ::asset-server]))
+(s/def ::db (s/keys :req [::compiled-book ::current-path ::asset-server ::showing-placeholder]))

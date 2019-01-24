@@ -1,7 +1,6 @@
 (ns cornelius-reader.compiled-book-reader
   (:require [cuerdas.core :refer [slug]]))
 
-;; UNIT: paths for all pages
 (defn page-to-path
   [page]
   (str "/" (slug (nth page 1)) "/" (nth page 5) "/"))
@@ -22,7 +21,6 @@
      (interleave paths pages)
      (apply array-map))))
 
-;; UNIT : paths for all chapters
 (defn chapter-to-path
   [chapter]
   (str "/" (slug chapter) "/"))
@@ -34,4 +32,10 @@
    (last)
    (map chapter-to-path)))
 
+(defn page
+  [paths-to-pages path]
+  (get paths-to-pages path))
 
+(defn page-url-beginning
+  [asset-server current-page]
+  (str asset-server "/" (get current-page 0)))

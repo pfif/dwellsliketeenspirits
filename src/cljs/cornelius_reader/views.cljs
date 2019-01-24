@@ -28,9 +28,10 @@
 (defn image
   [displayed image-url-beginning]
   (let [media-queries (media-queries-and-sizes compiled-image-sizes)]
-    [:img.page (-> {:src (str image-url-beginning "-2018.png")
-                   :srcSet (srcset image-url-beginning compiled-image-sizes)
-                   :sizes (sizes media-queries)}
+    [:img.page (-> {:src (str image-url-beginning "-2018.png") ;; TODO abstract this as it is used elsewhere
+                    :srcSet (srcset image-url-beginning compiled-image-sizes)
+                    :sizes (sizes media-queries)
+                    :id (rand-int 50)}
                    ((fn [props] (if displayed props (assoc props :style {:display "none"})))))]))
 (defn reader
   []
@@ -43,17 +44,22 @@
         chapter-name @(subscribe [:cornelius-reader.subs/current-chapter-name])
         page-progression @(subscribe [:cornelius-reader.subs/current-page-progression])
         current-ui-mode-class @(subscribe [:cornelius-reader.subs/current-ui-mode-class])
+        showing-placeholder @(subscribe [:cornelius-reader.subs/showing-placeholder])
         ]
     [:div.cornelius_reader {:class current-ui-mode-class}
      [change-page-link "previous_page link-button" previous-page-path "Page precedante"]
-     [image true current-page-image-url-beginning]
+     (if showing-placeholder
+       [:img.page {:src "/images/spinner.svg"}]
+       [image true current-page-image-url-beginning])
      [change-page-link "following_page link-button" following-page-path "Page suivante"]
      [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
      [:p.chapter_name.page_metadata chapter-name]
      [:p.chapter_page_progression.page_metadata page-progression]
      [chapters]
-     [image false previous-page-image-url-beginning]
-     [image false following-page-image-url-beginning]
+     (when-not showing-placeholder
+       [image false previous-page-image-url-beginning])
+     (when-not showing-placeholder
+       [image false following-page-image-url-beginning])
      ]))
 
 

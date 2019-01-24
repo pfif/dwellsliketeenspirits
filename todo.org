@@ -26,6 +26,7 @@
 ** DONE Add indication that "Chapters" is a menu
 ** DONE Adaptive images
 ** DONE Preload/Prefetch images
+** DONE Hide images when they are loading (damn it)
 ** TODO Navigate with scroll
 ** TODO Navigate with arrows
 ** TODO Navigate with touch
