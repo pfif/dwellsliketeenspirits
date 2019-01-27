@@ -140,14 +140,14 @@
          current-page-url-beginning (page-url-beginning asset-server current-page)
          current-srcset (srcset current-page-url-beginning compiled-image-sizes)
          current-sizes (sizes (media-queries-and-sizes compiled-image-sizes))]
-     {::load-image [current-page-url-beginning current-srcset current-sizes]})))
+     {::load-image [current-page-url-beginning current-srcset current-sizes current-path]})))
 
 (reg-fx
  ::load-image
- (fn [[page-url-beginning srcset sizes]]
+ (fn [[page-url-beginning srcset sizes path]]
    (let [image #?(:cljs (js/Image.)
                   :default (throw "The current platform cannot create an image element"))]
-     (set! (.-onload image) #(dispatch [::image-loaded]))
+     (set! (.-onload image) #(dispatch [::image-loaded path]))
      (set! (.-srcset image) srcset)
      (set! (.-sizes image) sizes)
      (set! (.-src image) (str page-url-beginning "-2018.png")))))
@@ -156,8 +156,11 @@
 
 (reg-event-db
  ::image-loaded
- (fn [db _]
-   (assoc db :cornelius-reader.db/showing-placeholder false)))
+ (fn [db [_ loaded-path]]
+   (let [current-path (get db :cornelius-reader.db/current-path)]
+     (if (= loaded-path current-path)
+       (assoc db :cornelius-reader.db/showing-placeholder false)
+       db))))
 
 ;; UNITS/EVENTS : ::show-chapters
 
