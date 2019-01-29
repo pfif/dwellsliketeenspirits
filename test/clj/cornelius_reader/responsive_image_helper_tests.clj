@@ -6,7 +6,7 @@
 (deftest srcset
   (testing "Returns the correct information for the browser to parse all the sizes of an image based on the url's beginning"
     (is (= (tested/srcset "/image/begin" [450 650])
-           "/image/begin-450.png 450w,/image/begin-650.png 650w"))))
+           "/image/begin-450.jpg 450w,/image/begin-650.jpg 650w"))))
 
 (deftest sizes
   (testing "It returns a correct value for the sizes argument"
@@ -31,8 +31,8 @@
 
 (deftest links-preload
   (testing "The correct link tags are returned"
-    (is (= [[:link {:rel "preload" :href "/image-400.png" :as "image" :media "lol"}]
-            [:link {:rel "prefetch" :href "/image-400.png" :as "image" :media "lol"}]
-            [:link {:rel "preload" :href "/image-400.png" :as "image" :media "lel"}]
-            [:link {:rel "prefetch" :href "/image-400.png" :as "image" :media "lel"}]]
+    (is (= [[:link {:rel "preload" :href "/image-400.jpg" :as "image" :media "lol"}]
+            [:link {:rel "prefetch" :href "/image-400.jpg" :as "image" :media "lol"}]
+            [:link {:rel "preload" :href "/image-400.jpg" :as "image" :media "lel"}]
+            [:link {:rel "prefetch" :href "/image-400.jpg" :as "image" :media "lel"}]]
            (tested/links-preload "/image" [["lol" 400] ["lel" 400]])))))

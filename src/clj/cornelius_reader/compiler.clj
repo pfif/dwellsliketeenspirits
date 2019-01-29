@@ -39,8 +39,8 @@
 (defn resize-image!
   [input-file output-file width]
   (let [image (resize-to-width (File. input-file) width)
-        converted-image (File. (str output-file ".png"))]
-    (ImageIO/write image "png" converted-image)))
+        converted-image (File. (str output-file ".jpg"))]
+    (ImageIO/write image "jpg" converted-image)))
 
 (defn resize-images!
   [specs]

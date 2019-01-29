@@ -28,7 +28,7 @@
 (defn image
   [displayed image-url-beginning]
   (let [media-queries (media-queries-and-sizes compiled-image-sizes)]
-    [:img.page (-> {:src (str image-url-beginning "-2018.png") ;; TODO abstract this as it is used elsewhere
+    [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
                     :srcSet (srcset image-url-beginning compiled-image-sizes)
                     :sizes (sizes media-queries)
                     :id (rand-int 50)}

@@ -150,7 +150,7 @@
      (set! (.-onload image) #(dispatch [::image-loaded path]))
      (set! (.-srcset image) srcset)
      (set! (.-sizes image) sizes)
-     (set! (.-src image) (str page-url-beginning "-2018.png")))))
+     (set! (.-src image) (str page-url-beginning "-2018.jpg")))))
 
 ;; UNITS/EVENTS : ::image-loaded
 

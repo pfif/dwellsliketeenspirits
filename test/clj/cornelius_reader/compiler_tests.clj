@@ -134,5 +134,5 @@
     (let [output-directory (create-temp-directory)]
       (resize-images! [["test_resources/chap2-page3.jpg" (str output-directory "/images") 2000]
                        ["test_resources/chap2-page3.jpg" (str output-directory "/images-2") 1000]])
-      (is (= (.exists (io/file (str output-directory "/images.png"))) true))
-      (is (= (.exists (io/file (str output-directory "/images-2.png"))) true)))))
+      (is (= (.exists (io/file (str output-directory "/images.jpg"))) true))
+      (is (= (.exists (io/file (str output-directory "/images-2.jpg"))) true)))))

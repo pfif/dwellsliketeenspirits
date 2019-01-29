@@ -7,7 +7,7 @@
   "Returns the value for srcset that informs the browser of all the compiled images that exists."
   [image-url-beginning image-sizes]
   (->>
-   (map #(str image-url-beginning "-" % ".png " % "w") image-sizes)
+   (map #(str image-url-beginning "-" % ".jpg " % "w") image-sizes)
    (str/join ",")))
 
 (defn a4-height
@@ -52,6 +52,6 @@
 (defn links-preload
   [image-url-beginning media-queries]
   (mapcat (fn [[media-query size]]
-            (let [image-url (str image-url-beginning "-" size ".png")]
+            (let [image-url (str image-url-beginning "-" size ".jpg")]
               [[:link {:rel "preload" :href image-url :as "image" :media media-query}]]))
           media-queries))
