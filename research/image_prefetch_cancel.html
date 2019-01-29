@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Cancel loading of image</title>
+        <script>
+         function addLinkToHeader(){
+             var link2 = new Image();
+             link2.src = "./Chp01.9.JPG"
+             document.head.appendChild(link2);
+
+             window.setTimeout(function(){
+                 console.log("STOP");
+                 link2.src = "/llol.jpg";
+             }, 1000);
+         }
+        </script>
+    </head>
+    <body>
+        <button onclick="addLinkToHeader()">HELLO!</button>
+    </body>
+</html>
