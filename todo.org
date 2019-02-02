@@ -27,19 +27,19 @@
 ** DONE Adaptive images
 ** DONE Preload/Prefetch images
 ** DONE Hide images when they are loading (damn it)
-** TODO Navigate with scroll
 ** DONE Navigate with arrows
-** TODO Navigate with touch
 ** TODO Hide buttons when they are not usable
-** TODO Add a menu (with a fake about page)
+** TODO Navigate with touch
 ** TODO Google Analytics
-** TODO Remove "push event"
+** TODO Navigate with scroll
+** DONE Remove "push event"
 * Feature waiting on other people
 ** About page
 ** Drawn teaser for the next chapter
 ** Skin for special occasion
 ** Basic design for wide screen
 ** Basic design for narrow screens
+** Add a menu (with a fake about page)
 * Features requiring proper design
 ** I18n
 ** Meta tags for better referencing

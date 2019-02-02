@@ -86,14 +86,8 @@
  ::path-changes
  [check-spec-interceptor]
  (fn [_ [_ new-path]]
-   {::push-new-path new-path
+   {::update-path new-path
     :dispatch [::show-placeholder]}))
-
-(reg-fx
-::push-new-path
-(fn [url]
-  #?(:cljs (.pushState window.history {} "" url)
-     :default (throw "The current platform cannot set the path of the browser"))))
 
 ;; UNIT/EVENT : ::show-placeholder
 (defn show-placeholder
