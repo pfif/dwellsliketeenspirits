@@ -171,3 +171,15 @@
  :<- [::current-page]
  (fn [current-page _]
    (get current-page 2)))
+
+(reg-sub
+ ::should-show-prev-button
+ :<- [::previous-page-path]
+ (fn [previous-page-path _]
+   (not (nil? previous-page-path))))
+
+(reg-sub
+ ::should-show-following-button
+ :<- [::following-page-path]
+ (fn [following-page-path _]
+   (not (nil? following-page-path))))

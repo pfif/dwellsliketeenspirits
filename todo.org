@@ -29,6 +29,9 @@
 ** DONE Hide images when they are loading (damn it)
 ** DONE Navigate with arrows
 ** TODO Hide buttons when they are not usable
+** TODO design for wide screen
+** TODO design for narrow screens
+** TODO design for A4 like screens
 ** TODO Navigate with touch
 ** TODO Google Analytics
 ** TODO Navigate with scroll
@@ -37,8 +40,6 @@
 ** About page
 ** Drawn teaser for the next chapter
 ** Skin for special occasion
-** Basic design for wide screen
-** Basic design for narrow screens
 ** Add a menu (with a fake about page)
 * Features requiring proper design
 ** I18n

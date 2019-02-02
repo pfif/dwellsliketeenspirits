@@ -45,13 +45,17 @@
         page-progression @(subscribe [:cornelius-reader.subs/current-page-progression])
         current-ui-mode-class @(subscribe [:cornelius-reader.subs/current-ui-mode-class])
         showing-placeholder @(subscribe [:cornelius-reader.subs/showing-placeholder])
+        should-show-prev-button @(subscribe [:cornelius-reader.subs/should-show-prev-button])
+        should-show-following-button @(subscribe [:cornelius-reader.subs/should-show-following-button])
         ]
     [:div.cornelius_reader {:class current-ui-mode-class}
-     [change-page-link "previous_page link-button" previous-page-path "Page precedante"]
+     (if should-show-prev-button
+       [change-page-link "previous_page link-button" previous-page-path "Page precedante"])
      (if showing-placeholder
        [:img.page {:src "/images/spinner.svg"}]
        [image true current-page-image-url-beginning])
-     [change-page-link "following_page link-button" following-page-path "Page suivante"]
+     (if should-show-following-button
+       [change-page-link "following_page link-button" following-page-path "Page suivante"])
      [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
      [:p.chapter_name.page_metadata chapter-name]
      [:p.chapter_page_progression.page_metadata page-progression]

@@ -66,8 +66,8 @@
         compiled-book (get db :cornelius-reader.db/compiled-book)
         paths (keys (map-paths-to-pages compiled-book))
         new-path (fn-find-path current-path paths)]
-    (if (not (nil? current-path))
-        {:dispatch [::path-changes new-path]})))
+    (if (and (not (nil? current-path)) (not (nil? new-path)))
+      {:dispatch [::path-changes new-path]})))
 
 (reg-event-fx
  ::previous-page
