@@ -28,7 +28,7 @@
 ** DONE Preload/Prefetch images
 ** DONE Hide images when they are loading (damn it)
 ** TODO Navigate with scroll
-** TODO Navigate with arrows
+** DONE Navigate with arrows
 ** TODO Navigate with touch
 ** TODO Hide buttons when they are not usable
 ** TODO Add a menu (with a fake about page)

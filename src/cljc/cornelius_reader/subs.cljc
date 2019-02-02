@@ -1,6 +1,11 @@
 (ns cornelius-reader.subs
   (:require [re-frame.core :refer [reg-sub]]
-            [cornelius-reader.compiled-book-reader :refer [map-paths-to-pages chapter-to-path page page-url-beginning page]]))
+            [cornelius-reader.compiled-book-reader :refer [map-paths-to-pages
+                                                           chapter-to-path
+                                                           page
+                                                           page-url-beginning
+                                                           following-page-path
+                                                           previous-page-path]]))
 
 ;; Level two subscriptions
 ;; TODO turn all of these into one
@@ -81,32 +86,25 @@
 
 ;; Level 3.2 subscription : Determines previous/following path (current just need to be fetched at level 2)
 
-(defn previous-page-path
+(defn previous-page-path-for-subs
   [[path paths] _]
-  (->> (map (partial vector) paths (cons nil paths))
-       (filter (fn [[current previous]] (= current path)))
-       (first)
-       (second)))
+  (previous-page-path path paths))
 
 (reg-sub
  ::previous-page-path
  :<- [::current-path]
  :<- [::paths]
- previous-page-path)
+ previous-page-path-for-subs)
 
-(defn following-page-path
+(defn following-page-path-for-subs
   [[path paths] _]
-  (let [shifted-list (concat (rest paths) [nil])]
-       (->> (map (partial vector) paths shifted-list)
-            (filter (fn [[current following]] (= current path)))
-            (first)
-            (second))))
+  (following-page-path path paths))
 
 (reg-sub
  ::following-page-path
  :<- [::current-path]
  :<- [::paths]
- following-page-path)
+ following-page-path-for-subs)
 
 ;; Level 3.3 : Determining pages
 

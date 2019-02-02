@@ -39,3 +39,18 @@
 (defn page-url-beginning
   [asset-server current-page]
   (str asset-server "/" (get current-page 0)))
+
+(defn following-page-path
+  [path paths]
+  (let [shifted-list (concat (rest paths) [nil])]
+    (->> (map (partial vector) paths shifted-list)
+         (filter (fn [[current following]] (= current path)))
+         (first)
+         (second))))
+
+(defn previous-page-path
+  [path paths]
+  (->> (map (partial vector) paths (cons nil paths))
+       (filter (fn [[current previous]] (= current path)))
+       (first)
+       (second)))

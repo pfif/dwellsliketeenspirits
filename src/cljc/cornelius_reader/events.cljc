@@ -3,25 +3,32 @@
             [re-frame.core :refer [after reg-event-db reg-cofx reg-event-fx inject-cofx reg-fx dispatch]]
             [cuerdas.core :as cuerdas]
             [cornelius-reader.compiled-book-reader :refer [map-paths-to-pages paths-for-all-chapters page
-                                                           page-url-beginning]]
+                                                           page-url-beginning previous-page-path following-page-path]]
             [cornelius-reader.responsive-image-helper :refer [compiled-image-sizes sizes srcset
                                                               media-queries-and-sizes]]))
 
-;; The event chain in this page:
+;; Chains (of events)
 ;;
+;; Initialization
 ;; 1. Initialize the database (start here when initializing the module)
 ;; 2. Load the compiled book
-;; (3. Push a new path) (start here when changing the page)
+;;
+;; Change page
+;; 3. Push a new path
 ;; 4. Show placeholder
 ;; 5. sanitize-path
 ;; 6. hide-chapters
 ;; 7. image-starts-loading
 ;; 8. image-loaded
 ;;
-;; 1. loaded
+;; Entry points to change page
+;; - Previous page
+;; - Next page
+;;
+;; Show chapters
+;; Hide chapters
 
 ;; Spec Validation (stolen from https://github.com/sulami/farm/blob/ba83866c1d94c37d221f19b8d2509a067ecedbc5/src/cljc/farm/events.cljc#L15)
-
 (def check-spec-interceptor
   (after (fn [db]
            (when-not (s/valid? :cornelius-reader.db/db db)
@@ -52,6 +59,26 @@
  ::compiled-book-ready
  [check-spec-interceptor]
  compiled-book-ready)
+
+(defn path-change-based-on-fn
+  [db fn-find-path]
+  (let [current-path (get db :cornelius-reader.db/current-path)
+        compiled-book (get db :cornelius-reader.db/compiled-book)
+        paths (keys (map-paths-to-pages compiled-book))
+        new-path (fn-find-path current-path paths)]
+    (if (not (nil? current-path))
+        {:dispatch [::path-changes new-path]})))
+
+(reg-event-fx
+ ::previous-page
+ (fn [{:keys [db]} _]
+   (path-change-based-on-fn db previous-page-path)))
+
+(reg-event-fx
+ ::following-page
+ (fn [{:keys [db]} _]
+   (path-change-based-on-fn db following-page-path)))
+
 
 ;; UNIT/EVENT : ::push-new-path
 

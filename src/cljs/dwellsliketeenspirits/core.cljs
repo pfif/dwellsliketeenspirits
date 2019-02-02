@@ -5,6 +5,7 @@
    [cornelius-reader.views :as cornelius-views]
    [cornelius-reader.events :as cornelius-events]
    [cornelius-reader.db :as cornelius-db]
+   [cornelius-reader.dispatcher :as cornelius-dispatcher]
    [ajax.core :refer [GET]]
    [dwellsliketeenspirits.events :as events]
    [dwellsliketeenspirits.routes :as routes]
@@ -26,6 +27,7 @@
 (defn ^:export init []
   (routes/app-routes)
   (re-frame/dispatch-sync [:cornelius-reader.events/initialization config/asset-server-url])
+  (cornelius-dispatcher/create-event-dispatchers)
   ;; TODO : Extract this fetcher
   (GET (str config/asset-server-url "/compiled-book.edn")
        {:handler (fn [response]
