@@ -71,14 +71,3 @@ cornerlius_reader{
 .cornelius_reader.hide-metadata-ui .page_metadata, .cornelius_reader.hide-metadata-ui .link-button{
     display: none;
 }
-
-
-.cornelius_reader .chapters{
-    position: absolute;
-    top: 0;
-    left: 0;
-
-    width: 100vw;
-    height: 100vh;
-    background-color: black;
-}
