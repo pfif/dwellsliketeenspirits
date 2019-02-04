@@ -1,0 +1,84 @@
+/* General layout */
+
+.cornelius_reader{
+    grid-template-rows:
+                            20px
+                            30px
+                            1fr
+                            40px;
+    grid-template-columns: 1fr
+                              8px
+                              10px
+                              auto
+                              8px
+                              10px
+                               1fr;
+    grid-template-areas:
+        "chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
+        "chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
+        ". . . . . . ."
+        ". previous-button . chapter-page-progression . following-button ."
+}
+
+cornerlius_reader{
+    position: absolute;
+}
+
+.cornelius_reader .page{
+    position: absolute;
+}
+
+@media screen and (min-aspect-ratio: 210/297){
+    .cornelius_reader{
+        height: 100vh;
+        width: calc(21/29.7 * 100vh);
+        margin-left: calc((100vw - (21/29.7 * 100vh)) / 2);
+        margin-top: 0px;
+    }
+
+    .cornelius_reader .page{
+        height: 100vh;
+    }
+}
+
+@media screen and (max-aspect-ratio: 210/297){
+    .cornelius_reader{
+        width: 100vw;
+        height: calc(29.7/21 * 100vw);
+        margin-top: calc((100vh - (29.7/21 * 100vw)) / 2);
+        margin-left: 0px;
+    }
+
+    .cornelius_reader .page{
+        width: 100vw;
+    }
+}
+
+.cornelius_reader .page{
+    z-index: 0;
+}
+
+.cornelius_reader > * {
+    z-index: 1;
+}
+
+/* UI */
+
+.cornelius_reader .page_metadata{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.cornelius_reader.hide-metadata-ui .page_metadata, .cornelius_reader.hide-metadata-ui .link-button{
+    display: none;
+}
+
+
+.cornelius_reader .chapters{
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+}

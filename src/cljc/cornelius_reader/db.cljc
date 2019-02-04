@@ -20,9 +20,10 @@
 (s/def ::current-path (s/nilable (s/and string? #(re-matches #"/[a-z-]+/[0-9]+/" %))))
 (s/def ::showing-chapters-list boolean?)
 (s/def ::showing-placeholder boolean?)
+(s/def ::metadata-ui-visibility-id (s/nilable int?))
 
 ;; Configuration
 (s/def ::asset-server string?)
 
 ;; Database
-(s/def ::db (s/keys :req [::compiled-book ::current-path ::asset-server ::showing-placeholder]))
+(s/def ::db (s/keys :req [::compiled-book ::current-path ::asset-server ::showing-placeholder ::metadata-ui-visibility-id]))

@@ -25,6 +25,11 @@
         ". . . . . . ."
 }
 
+.cornelius_reader{
+    width: 100vw;
+    height: 100vh;
+}
+
 .cornelius_reader .chapters{
     position: absolute;
     top: 0;
@@ -33,4 +38,9 @@
     width: 100vw;
     height: 100vh;
     background-color: black;
+}
+
+.cornelius_reader .page {
+    grid-area: page;
+    place-self: stretch;
 }

@@ -47,8 +47,9 @@
         showing-placeholder @(subscribe [:cornelius-reader.subs/showing-placeholder])
         should-show-prev-button @(subscribe [:cornelius-reader.subs/should-show-prev-button])
         should-show-following-button @(subscribe [:cornelius-reader.subs/should-show-following-button])
+        metadata-ui-visibility-class @(subscribe [:cornelius-reader.subs/metadata-ui-visibility-class])
         ]
-    [:div.cornelius_reader {:class current-ui-mode-class}
+    [:div.cornelius_reader {:class (str current-ui-mode-class " " metadata-ui-visibility-class)}
      (if should-show-prev-button
        [change-page-link "previous_page link-button" previous-page-path "Page precedante"])
      (if showing-placeholder

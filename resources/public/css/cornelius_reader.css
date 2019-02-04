@@ -1,17 +1,10 @@
 /* General display */
 
-/* Layout */
 .cornelius_reader{
-    width: 100vw;
-    height: 100vh;
     display: grid;
 }
 
-.cornelius_reader .page {
-    grid-area: page;
-    place-self: stretch;
-}
-
+/* Layout */
 .cornelius_reader .following_page, .cornelius_reader .previous_page{
     place-self: center;
 }

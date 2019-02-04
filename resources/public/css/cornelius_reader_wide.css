@@ -14,6 +14,11 @@
                              1fr;
 }
 
+.cornelius_reader{
+    width: 100vw;
+    height: 100vh;
+}
+
 .cornelius_reader.page-metadata-mode{
     grid-template-areas:
     ". previous-button . page . following-button ."
@@ -33,3 +38,9 @@
         ". previous-button . page . following-button chapters"
         ". previous-button . page . following-button chapters";
 }
+
+.cornelius_reader .page {
+    grid-area: page;
+    place-self: stretch;
+}
+

@@ -39,6 +39,12 @@
    [db _]
    (get db :cornelius-reader.db/showing-placeholder)))
 
+(reg-sub
+ ::metadata-ui-visibility-id
+ (fn
+   [db _]
+   (get db :cornelius-reader.db/metadata-ui-visibility-id)))
+
 ;; Level 3
 
 (reg-sub
@@ -49,6 +55,15 @@
   (if showing-chapters-list
     "chapters-list-mode"
     "page-metadata-mode")))
+
+(reg-sub
+ ::metadata-ui-visibility-class
+ :<- [::metadata-ui-visibility-id]
+ (fn
+   [metadata-ui-visibility-uuid]
+   (if (nil? metadata-ui-visibility-uuid)
+     "hide-metadata-ui"
+     "show-metadata-ui")))
 
 ;; Level 3.1 subscriptions : any materialized state of the compiled-book
 

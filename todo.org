@@ -28,11 +28,16 @@
 ** DONE Preload/Prefetch images
 ** DONE Hide images when they are loading (damn it)
 ** DONE Navigate with arrows
-** TODO Hide buttons when they are not usable
+** DONE Hide buttons when they are not usable
+** DONE Basic design for A4 like screen
+   Smallest narrow ratio : 20/33
+   Smallest wide ratio : 63/53
+** TODO Hide/Show metadata ui on touch
+** TODO Add a title
 ** TODO design for wide screen
 ** TODO design for narrow screens
 ** TODO design for A4 like screens
-** TODO Navigate with touch
+** TODO Navigate with swipe
 ** TODO Google Analytics
 ** TODO Navigate with scroll
 ** DONE Remove "push event"

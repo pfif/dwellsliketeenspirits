@@ -27,6 +27,10 @@
 ;;
 ;; Show chapters
 ;; Hide chapters
+;;
+;; UI visibility :
+;; - show-ui
+;; - hide-ui
 
 ;; Spec Validation (stolen from https://github.com/sulami/farm/blob/ba83866c1d94c37d221f19b8d2509a067ecedbc5/src/cljc/farm/events.cljc#L15)
 (def check-spec-interceptor
@@ -42,7 +46,8 @@
       (assoc :cornelius-reader.db/current-path nil)
       (assoc :cornelius-reader.db/asset-server asset-server)
       (assoc :cornelius-reader.db/showing-chapters-list false)
-      (assoc :cornelius-reader.db/showing-placeholder false)))
+      (assoc :cornelius-reader.db/showing-placeholder false)
+      (assoc :cornelius-reader.db/metadata-ui-visibility-id nil)))
 
 (reg-event-db
  ::initialization
@@ -53,7 +58,8 @@
 (defn compiled-book-ready
   [{:keys [db]} [_ compiled-book]]
   {:db (assoc db :cornelius-reader.db/compiled-book compiled-book)
-   :dispatch [::show-placeholder]})
+   :dispatch-n [[::show-placeholder]
+                [::show-metadata-ui]]})
 
 (reg-event-fx
  ::compiled-book-ready
@@ -71,17 +77,18 @@
 
 (reg-event-fx
  ::previous-page
+ [check-spec-interceptor]
  (fn [{:keys [db]} _]
    (path-change-based-on-fn db previous-page-path)))
 
 (reg-event-fx
  ::following-page
+ [check-spec-interceptor]
  (fn [{:keys [db]} _]
    (path-change-based-on-fn db following-page-path)))
 
 
 ;; UNIT/EVENT : ::push-new-path
-
 (reg-event-fx
  ::path-changes
  [check-spec-interceptor]
@@ -98,6 +105,7 @@
 
 (reg-event-fx
  ::show-placeholder
+ [check-spec-interceptor]
  show-placeholder)
 
 ;; UNIT/EVENT : ::sanitize-path
@@ -152,6 +160,7 @@
 ;; UNITS/EVENTS : ::image-starts-loading
 (reg-event-fx
  ::image-starts-loading
+ [check-spec-interceptor]
  (fn [{:keys [db]}]
    (let [compiled-book (get db :cornelius-reader.db/compiled-book)
          current-path (get db :cornelius-reader.db/current-path)
@@ -177,6 +186,7 @@
 
 (reg-event-db
  ::image-loaded
+ [check-spec-interceptor]
  (fn [db [_ loaded-path]]
    (let [current-path (get db :cornelius-reader.db/current-path)]
      (if (= loaded-path current-path)
@@ -187,12 +197,30 @@
 
 (reg-event-db
  ::chapters-shown
+ [check-spec-interceptor]
  (fn [db _]
    (assoc db :cornelius-reader.db/showing-chapters-list true)))
 
-;; UNITS/EVENTS : ::hide-chapters
-
 (reg-event-db
  ::chapters-hidden
+ [check-spec-interceptor]
  (fn [db _]
    (assoc db :cornelius-reader.db/showing-chapters-list false)))
+
+;; UI Visibility
+
+(reg-event-fx
+ ::show-metadata-ui
+ [check-spec-interceptor]
+ (fn [{:keys [db]} _]
+   (let [id (rand-int 100000)]
+     {:db (assoc db :cornelius-reader.db/metadata-ui-visibility-id id)
+      :dispatch-later [{:ms 2000 :dispatch [::hide-metadata-ui id]}]})))
+
+(reg-event-db
+ ::hide-metadata-ui
+ [check-spec-interceptor]
+ (fn [db [_ uuid]]
+   (if (= (get db :cornelius-reader.db/metadata-ui-visibility-id) uuid)
+     (assoc db :cornelius-reader.db/metadata-ui-visibility-id nil)
+     db)))
