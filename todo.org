@@ -32,7 +32,7 @@
 ** DONE Basic design for A4 like screen
    Smallest narrow ratio : 20/33
    Smallest wide ratio : 63/53
-** TODO Hide/Show metadata ui on touch
+** DONE Hide/Show metadata ui on touch
 ** TODO Add a title
 ** TODO design for wide screen
 ** TODO design for narrow screens
