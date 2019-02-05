@@ -38,12 +38,12 @@
                              (.on @hammer "tap" (fn [ev]
                                                   (.preventDefault (.-srcEvent ev))
                                                   (dispatch [:cornelius-reader.events/toggle-metadata-ui]))))
-      :reagent-render(fn [_]
-                       [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
-                                       :srcSet (srcset image-url-beginning compiled-image-sizes)
-                                       :sizes (sizes media-queries)
-                                       :id (rand-int 50)}
-                                      ((fn [props] (if displayed props (assoc props :style {:display "none"})))))])
+      :reagent-render (fn [displayed image-url-beginning]
+                        [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
+                                        :srcSet (srcset image-url-beginning compiled-image-sizes)
+                                        :sizes (sizes media-queries)
+                                        :id (rand-int 50)}
+                                       ((fn [props] (if displayed props (assoc props :style {:display "none"})))))])
       :component-will-unmount (fn [_]
                                 (.destroy @hammer))})))
 (defn reader
