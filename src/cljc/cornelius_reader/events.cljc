@@ -210,6 +210,14 @@
 ;; UI Visibility
 
 (reg-event-fx
+ ::toggle-metadata-ui
+ [check-spec-interceptor]
+ (fn [{:keys [db]} _]
+   (if (nil? (get db :cornelius-reader.db/metadata-ui-visibility-id))
+     {:dispatch [::show-metadata-ui]}
+     {:dispatch [::hide-metadata-ui nil]})))
+
+(reg-event-fx
  ::show-metadata-ui
  [check-spec-interceptor]
  (fn [{:keys [db]} _]
@@ -221,6 +229,6 @@
  ::hide-metadata-ui
  [check-spec-interceptor]
  (fn [db [_ uuid]]
-   (if (= (get db :cornelius-reader.db/metadata-ui-visibility-id) uuid)
+   (if (or (= (get db :cornelius-reader.db/metadata-ui-visibility-id) uuid) (nil? uuid))
      (assoc db :cornelius-reader.db/metadata-ui-visibility-id nil)
      db)))

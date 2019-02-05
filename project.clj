@@ -7,7 +7,8 @@
                  [image-resizer "0.1.10"]
                  [cljs-ajax "0.8.0"]
                  [funcool/cuerdas "2.0.5"]
-                 [re-pressed "0.3.0"]]
+                 [re-pressed "0.3.0"]
+                 [cljsjs/hammer "2.0.8-0"]]
 
   :plugins [[lein-cljsbuild "1.1.7"]
             [lein-ring "0.12.4"]]

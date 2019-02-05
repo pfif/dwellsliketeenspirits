@@ -1,7 +1,9 @@
 (ns cornelius-reader.views
   (:require [re-frame.core :refer [subscribe dispatch]]
+            [reagent.core :as r]
             [cornelius-reader.subs :as subs]
-            [cornelius-reader.responsive-image-helper :refer [srcset compiled-image-sizes sizes media-queries-and-sizes links-preload]]))
+            [cornelius-reader.responsive-image-helper :refer [srcset compiled-image-sizes sizes media-queries-and-sizes links-preload]]
+            [cljsjs.hammer]))
 
 (defn loading
   []
@@ -27,12 +29,23 @@
 
 (defn image
   [displayed image-url-beginning]
-  (let [media-queries (media-queries-and-sizes compiled-image-sizes)]
-    [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
-                    :srcSet (srcset image-url-beginning compiled-image-sizes)
-                    :sizes (sizes media-queries)
-                    :id (rand-int 50)}
-                   ((fn [props] (if displayed props (assoc props :style {:display "none"})))))]))
+  (let [media-queries (media-queries-and-sizes compiled-image-sizes)
+        hammer (atom nil)]
+    (r/create-class
+     {:component-did-mount (fn [this]
+                             (reset! hammer (new js/Hammer.Manager (r/dom-node this)))
+                             (.add @hammer (new js/Hammer.Tap))
+                             (.on @hammer "tap" (fn [ev]
+                                                  (.preventDefault (.-srcEvent ev))
+                                                  (dispatch [:cornelius-reader.events/toggle-metadata-ui]))))
+      :reagent-render(fn [_]
+                       [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
+                                       :srcSet (srcset image-url-beginning compiled-image-sizes)
+                                       :sizes (sizes media-queries)
+                                       :id (rand-int 50)}
+                                      ((fn [props] (if displayed props (assoc props :style {:display "none"})))))])
+      :component-will-unmount (fn [_]
+                                (.destroy @hammer))})))
 (defn reader
   []
   (let [previous-page-path @(subscribe [:cornelius-reader.subs/previous-page-path])
