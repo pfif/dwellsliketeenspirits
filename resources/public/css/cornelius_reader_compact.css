@@ -45,7 +45,7 @@ cornerlius_reader{
     .cornelius_reader{
         width: 100vw;
         height: calc(29.7/21 * 100vw);
-        margin-top: calc((100vh - (29.7/21 * 100vw)) / 8);
+        margin-top: calc((100vh - (29.7/21 * 100vw)) / 2);
         margin-left: 0px;
     }
 
