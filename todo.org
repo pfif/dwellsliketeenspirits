@@ -33,12 +33,12 @@
    Smallest narrow ratio : 20/33
    Smallest wide ratio : 63/53
 ** DONE Hide/Show metadata ui on touch
-** TODO Add a title
+** DONE Add a title
 ** TODO design for wide screen
 ** TODO design for narrow screens
 ** TODO design for A4 like screens
 ** TODO Navigate with swipe
-** TODO Google Analytics
+** DONE Google Analytics
 ** TODO Navigate with scroll
 ** DONE Remove "push event"
 * Feature waiting on other people

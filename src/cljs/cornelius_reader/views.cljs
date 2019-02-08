@@ -41,9 +41,16 @@
      {:component-did-mount (fn [this]
                              (reset! hammer (new js/Hammer.Manager (r/dom-node this)))
                              (.add @hammer (new js/Hammer.Tap))
+                             (.add @hammer (new js/Hammer.Swipe))
                              (.on @hammer "tap" (fn [ev]
                                                   (.preventDefault (.-srcEvent ev))
-                                                  (dispatch [:cornelius-reader.events/toggle-metadata-ui]))))
+                                                  (dispatch [:cornelius-reader.events/toggle-metadata-ui])))
+                             (.on @hammer "swiperight" (fn [ev]
+                                                         (.preventDefault (.-srcEvent ev))
+                                                         (dispatch [:cornelius-reader.events/previous-page])))
+                             (.on @hammer "swipeleft" (fn [ev]
+                                                         (.preventDefault (.-srcEvent ev))
+                                                         (dispatch [:cornelius-reader.events/following-page]))))
       :reagent-render (fn [displayed image-url-beginning]
                         [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
                                         :srcSet (srcset image-url-beginning compiled-image-sizes)
