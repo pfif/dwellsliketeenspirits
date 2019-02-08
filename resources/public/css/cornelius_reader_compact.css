@@ -14,8 +14,8 @@
                               10px
                                1fr;
     grid-template-areas:
-        "chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
-        "chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
+        "website-title chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
+        "website-title chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
         ". . . . . . ."
         ". previous-button . chapter-page-progression . following-button ."
 }
@@ -68,6 +68,6 @@ cornerlius_reader{
     background-color: rgba(0, 0, 0, 0.7);
 }
 
-.cornelius_reader.hide-metadata-ui .page_metadata, .cornelius_reader.hide-metadata-ui .link-button{
+.cornelius_reader.hide-metadata-ui .page_metadata, .cornelius_reader.hide-metadata-ui .link-button, .cornelius_reader.hide-metadata-ui #website_title{
     display: none;
 }

@@ -5,10 +5,16 @@
             [cornelius-reader.responsive-image-helper :refer [srcset compiled-image-sizes sizes media-queries-and-sizes links-preload]]
             [cljsjs.hammer]))
 
+(defn website-skeleton
+  [classes elements]
+  [:div.cornelius_reader {:class classes}
+   (cons [:h1#website_title [:a {:href "/"} "Dwells like teen spirits"]] elements)])
+
 (defn loading
   []
-  [:div.cornelius_reader
-   [:p.loading_screen "Chargement ..."]])
+  (website-skeleton
+   ""
+   [:p.loading_screen "Chargement ..."]))
 
 (defn change-page-link
   [class path text]
@@ -62,23 +68,24 @@
         should-show-following-button @(subscribe [:cornelius-reader.subs/should-show-following-button])
         metadata-ui-visibility-class @(subscribe [:cornelius-reader.subs/metadata-ui-visibility-class])
         ]
-    [:div.cornelius_reader {:class (str current-ui-mode-class " " metadata-ui-visibility-class)}
-     (if should-show-prev-button
-       [change-page-link "previous_page link-button" previous-page-path "Page precedante"])
-     (if showing-placeholder
-       [:img.page {:src "/images/spinner.svg"}]
-       [image true current-page-image-url-beginning])
-     (if should-show-following-button
-       [change-page-link "following_page link-button" following-page-path "Page suivante"])
-     [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
-     [:p.chapter_name.page_metadata chapter-name]
-     [:p.chapter_page_progression.page_metadata page-progression]
-     [chapters]
-     (when-not showing-placeholder
-       [image false previous-page-image-url-beginning])
-     (when-not showing-placeholder
-       [image false following-page-image-url-beginning])
-     ]))
+    (website-skeleton (str current-ui-mode-class " " metadata-ui-visibility-class)
+                      [(if should-show-prev-button
+                         [change-page-link "previous_page link-button" previous-page-path "Page precedante"])
+                       (if showing-placeholder
+                         [:img.page {:src "/images/spinner.svg"}]
+                         [image true current-page-image-url-beginning])
+                       (if should-show-following-button
+                         [change-page-link "following_page link-button" following-page-path "Page suivante"])
+                       [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
+                       [:p.chapter_name.page_metadata chapter-name]
+                       [:p.chapter_page_progression.page_metadata page-progression]
+                       [chapters]
+                       (when-not showing-placeholder
+                         [image false previous-page-image-url-beginning])
+                       (when-not showing-placeholder
+                         [image false following-page-image-url-beginning])])))
+
+
 
 
 (defn main-panel

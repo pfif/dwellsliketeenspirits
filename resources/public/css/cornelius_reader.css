@@ -32,6 +32,10 @@
     grid-area: chapter-page-progression;
 }
 
+.cornelius_reader #website_title{
+    grid-area: website-title;
+}
+
 /* Page metadata */
 .cornelius_reader.chapters-list-mode .page_metadata{
     display: none;
@@ -100,4 +104,14 @@
     grid-area: page;
     place-self: center;
     color: white;
+}
+
+/* Title */
+.cornelius_reader #website_title > a{
+    background-size: 100% auto;
+    background-repeat: no-repeat no-repeat;
+    color: rgba(1,1,1,0);
+    display: block;
+    width: 100%;
+    height: 100%;
 }

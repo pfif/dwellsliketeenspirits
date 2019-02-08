@@ -21,22 +21,22 @@
 
 .cornelius_reader.page-metadata-mode{
     grid-template-areas:
-    ". previous-button . page . following-button ."
-        ". previous-button . page . following-button chapter-number"
-        ". previous-button . page . following-button chapter-name"
-        ". previous-button . page . following-button ."
-        ". previous-button . page . following-button chapter-page-progression"
-        ". previous-button . page . following-button .";
+    "website-title previous-button . page . following-button ."
+        "website-title previous-button . page . following-button chapter-number"
+        "website-title previous-button . page . following-button chapter-name"
+        "website-title previous-button . page . following-button ."
+        "website-title previous-button . page . following-button chapter-page-progression"
+        "website-title previous-button . page . following-button .";
 }
 
 .cornelius_reader.chapters-list-mode{
     grid-template-areas:
-    ". previous-button . page . following-button chapters"
-        ". previous-button . page . following-button chapters"
-        ". previous-button . page . following-button chapters"
-        ". previous-button . page . following-button chapters"
-        ". previous-button . page . following-button chapters"
-        ". previous-button . page . following-button chapters";
+    "website-title previous-button . page . following-button chapters"
+        "website-title previous-button . page . following-button chapters"
+        "website-title previous-button . page . following-button chapters"
+        "website-title previous-button . page . following-button chapters"
+        "website-title previous-button . page . following-button chapters"
+        "website-title previous-button . page . following-button chapters";
 }
 
 .cornelius_reader .page {
@@ -44,3 +44,7 @@
     place-self: stretch;
 }
 
+
+.cornelius_reader #website_title > a{
+    background-image: url("/images/logo.png");
+}

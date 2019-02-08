@@ -16,8 +16,8 @@
                                1fr;
     grid-template-areas:
     ". . . . . . ."
-        "chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
-        "chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
+        "website-title chapter-number chapter-number chapter-number chapter-number chapter-number chapter-number"
+        "website-title chapter-name chapter-name chapter-name chapter-name chapter-name chapter-name"
         ". . . . . . ."
         "page page page page page page page"
         ". . . . . . ."
