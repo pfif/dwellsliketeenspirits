@@ -1,4 +1,25 @@
 body {
-    background-color: rgb(39, 39, 39);
+    background-color: black;
+    background-image:
+
+    linear-gradient(rgba(52, 52, 52, 1), rgba(52, 52, 52, 1)),
+    url("/images/bg-01.jpg"),
+    linear-gradient(to bottom, rgba(30, 30, 30, 1), rgba(29, 29, 29, 1)),
+    url("/images/bg-02.jpg"),
+    linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1));
+
+    background-repeat: repeat no-repeat;
+    background-size:
+    auto 6vh,
+    auto,
+    auto 6vh,
+    auto,
+    auto;
+
+    background-position:
+    0vw 0vh,
+    0vw 5vh,
+    0vw calc(5vh + 250px),
+    0vw calc(5vh + 250px + 5vh);
     font-family: arial;
 }
