@@ -37,6 +37,7 @@ cornerlius_reader{
     }
 
     .cornelius_reader .page{
+        width: calc(21/29.7 * 100vh);
         height: 100vh;
     }
 }
@@ -51,6 +52,7 @@ cornerlius_reader{
 
     .cornelius_reader .page{
         width: 100vw;
+        height: calc(29.7/21 * 100vw);
     }
 }
 

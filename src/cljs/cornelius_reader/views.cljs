@@ -14,9 +14,13 @@
 
 (defn loading
   []
+  [:p.page.loadingpj "Chargement ..."])
+
+(defn loading-screen
+  []
   (website-skeleton
    ""
-   [:p.loading_screen "Chargement ..."]))
+   [loading]))
 
 (defn change-page-link
   [class path text]
@@ -56,8 +60,7 @@
       :reagent-render (fn [displayed image-url-beginning]
                         [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
                                         :srcSet (srcset image-url-beginning compiled-image-sizes)
-                                        :sizes (sizes media-queries)
-                                        :id (rand-int 50)}
+                                        :sizes (sizes media-queries)}
                                        ((fn [props] (if displayed props (assoc props :style {:display "none"})))))])
       :component-will-unmount (fn [_]
                                 (.destroy @hammer))})))
@@ -81,8 +84,9 @@
                       [(if should-show-prev-button
                          [change-page-link "previous_page link-button" previous-page-path "Page precedante"])
                        (if showing-placeholder
-                         [:img.page {:src "/images/spinner.svg"}]
-                         [image true current-page-image-url-beginning])
+                         [loading]
+                         [image true current-page-image-url-beginning]
+                         )
                        (if should-show-following-button
                          [change-page-link "following_page link-button" following-page-path "Page suivante"])
                        [:p.chapter_number.page_metadata {:on-click #(dispatch [:cornelius-reader.events/chapters-shown])} (str "Chapitre " chapter-number)]
@@ -101,5 +105,5 @@
   []
   (let [current-panel @(subscribe [:cornelius-reader.subs/current-frame])]
     (case current-panel
-      :loading [loading]
+      :loading [loading-screen]
       :reader [reader])))

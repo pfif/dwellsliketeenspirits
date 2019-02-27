@@ -34,12 +34,13 @@
    Smallest wide ratio : 63/53
 ** DONE Hide/Show metadata ui on touch
 ** DONE Add a title
-** TODO Loading PJ
+** DONE Loading PJ
 ** DONE The image
 ** TODO Chapter icon
 ** TODO Chapter list
 ** DONE Font
 ** TODO Arrows
+** TODO Preload interface
 ** DONE Navigate with swipe
 ** TODO Google Analytics
 ** TODO Navigate with scroll

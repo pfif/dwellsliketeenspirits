@@ -116,3 +116,25 @@
 .cornerlius_reader #friends{
     grid-area: friends;
 }
+
+/* Loading PJ */
+.cornelius_reader .loadingpj{
+    background-image: url("/images/pj.png");
+    background-size: 200px;
+    background-repeat: no-repeat;
+    background-position: center;
+    color: rgba(1,1,1,0);
+    animation: rotate 3s ease-in-out infinite;
+}
+
+@keyframes rotate{
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1);
+    }
+    100%{
+        transform: scale(0.8);
+    }
+}
