@@ -10,4 +10,9 @@
 
 .cornelius_reader #website_title > a{
     background-image: url("/images/logo-inline.png");
+    background-size: contain;
+}
+
+.cornelius_reader .chapter_number, .cornelius_reader .chapter_name,.cornelius_reader .chapter_page_progression {
+    text-align: right;
 }

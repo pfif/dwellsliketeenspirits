@@ -45,6 +45,16 @@
 }
 
 
+.cornelius_reader #website_title{
+    justify-self: center;
+    margin-top: 50px;
+    width: 300px;
+}
 .cornelius_reader #website_title > a{
     background-image: url("/images/logo.png");
+    background-size: 100% auto;
+}
+
+.cornelius_reader .chapter_number, .cornelius_reader .chapter_name,.cornelius_reader .chapter_page_progression {
+    text-align: center;
 }

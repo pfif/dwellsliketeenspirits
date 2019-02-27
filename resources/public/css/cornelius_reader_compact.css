@@ -64,7 +64,7 @@ cornerlius_reader{
 
 /* UI */
 
-.cornelius_reader .page_metadata{
+.cornelius_reader .page_metadata, .cornelius_reader #website_title > a {
     background-color: rgba(0, 0, 0, 0.7);
 }
 

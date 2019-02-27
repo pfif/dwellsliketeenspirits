@@ -37,8 +37,8 @@
 ** TODO design for wide screen
 ** TODO design for narrow screens
 ** TODO design for A4 like screens
-** TODO Navigate with swipe
-** DONE Google Analytics
+** DONE Navigate with swipe
+** TODO Google Analytics
 ** TODO Navigate with scroll
 ** DONE Remove "push event"
 * Feature waiting on other people
