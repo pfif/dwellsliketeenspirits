@@ -111,3 +111,8 @@
     width: 100%;
     height: 100%;
 }
+
+/* Friends */
+.cornerlius_reader #friends{
+    grid-area: friends;
+}

@@ -22,21 +22,21 @@
 .cornelius_reader.page-metadata-mode{
     grid-template-areas:
     "website-title previous-button . page . following-button ."
-        "website-title previous-button . page . following-button chapter-number"
-        "website-title previous-button . page . following-button chapter-name"
-        "website-title previous-button . page . following-button ."
-        "website-title previous-button . page . following-button chapter-page-progression"
-        "website-title previous-button . page . following-button .";
+        "friends previous-button . page . following-button chapter-number"
+        "friends previous-button . page . following-button chapter-name"
+        "friends previous-button . page . following-button ."
+        "friends previous-button . page . following-button chapter-page-progression"
+        "friends previous-button . page . following-button .";
 }
 
 .cornelius_reader.chapters-list-mode{
     grid-template-areas:
     "website-title previous-button . page . following-button chapters"
-        "website-title previous-button . page . following-button chapters"
-        "website-title previous-button . page . following-button chapters"
-        "website-title previous-button . page . following-button chapters"
-        "website-title previous-button . page . following-button chapters"
-        "website-title previous-button . page . following-button chapters";
+        "friends previous-button . page . following-button chapters"
+        "friends previous-button . page . following-button chapters"
+        "friends previous-button . page . following-button chapters"
+        "friends previous-button . page . following-button chapters"
+        "friends previous-button . page . following-button chapters";
 }
 
 .cornelius_reader .page {
@@ -57,4 +57,14 @@
 
 .cornelius_reader .chapter_number, .cornelius_reader .chapter_name,.cornelius_reader .chapter_page_progression {
     text-align: center;
+}
+
+
+/* Friends */
+.cornelius_reader #friends{
+    grid-area: friends;
+    background-image: url("/images/friends.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
 }

@@ -16,3 +16,9 @@
 .cornelius_reader .chapter_number, .cornelius_reader .chapter_name,.cornelius_reader .chapter_page_progression {
     text-align: right;
 }
+
+
+/* Friends */
+.cornelius_reader #friends{
+    display: none;
+}

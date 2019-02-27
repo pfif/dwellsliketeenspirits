@@ -34,9 +34,12 @@
    Smallest wide ratio : 63/53
 ** DONE Hide/Show metadata ui on touch
 ** DONE Add a title
-** TODO design for wide screen
-** TODO design for narrow screens
-** TODO design for A4 like screens
+** TODO Loading PJ
+** DONE The image
+** TODO Chapter icon
+** TODO Chapter list
+** TODO Font
+** TODO Arrows
 ** DONE Navigate with swipe
 ** TODO Google Analytics
 ** TODO Navigate with scroll

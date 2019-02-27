@@ -8,7 +8,9 @@
 (defn website-skeleton
   [classes elements]
   [:div.cornelius_reader {:class classes}
-   (cons [:h1#website_title [:a {:href "/"} "Dwells like teen spirits"]] elements)])
+   (concat [[:h1#website_title [:a {:href "/"} "Dwells like teen spirits"]]
+            [:div#friends]]
+           elements)])
 
 (defn loading
   []
