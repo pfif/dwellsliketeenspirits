@@ -38,7 +38,7 @@
 ** DONE The image
 ** TODO Chapter icon
 ** TODO Chapter list
-** TODO Font
+** DONE Font
 ** TODO Arrows
 ** DONE Navigate with swipe
 ** TODO Google Analytics
