@@ -21,6 +21,15 @@
     grid-area: chapter-number;
 }
 
+.cornelius_reader .chapter_number::after{
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 15px;
+    transform: rotate(270deg);
+    margin-left: 15px;
+}
+
 .cornelius_reader .chapter_name{
     grid-area: chapter-name;
 }
@@ -84,11 +93,13 @@
     transform:rotate(180deg);
 }
 
-.cornelius_reader .link-button{
+.cornelius_reader .link-button, .cornelius_reader .chapter_number::after{
     background-image: url("/images/change_page_button.svg");
+    background-size: 100%;
+    background-repeat: no-repeat
+}
 
-    background-size-width: 8px;
-    background-size-height: 26px;
+.cornelius_reader .link-button{
     width: 8px;
     height: 26px;
 }

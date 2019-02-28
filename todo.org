@@ -36,7 +36,7 @@
 ** DONE Add a title
 ** DONE Loading PJ
 ** DONE The image
-** TODO Chapter icon
+** DONE Chapter icon
 ** TODO Chapter list
 ** DONE Font
 ** TODO Arrows
