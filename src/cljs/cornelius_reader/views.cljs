@@ -49,13 +49,13 @@
                              (.add @hammer (new js/Hammer.Tap))
                              (.add @hammer (new js/Hammer.Swipe))
                              (.on @hammer "tap" (fn [ev]
-                                                  (.preventDefault (.-srcEvent ev))
+                                                  (.preventDefault ev)
                                                   (dispatch [:cornelius-reader.events/toggle-metadata-ui])))
                              (.on @hammer "swiperight" (fn [ev]
-                                                         (.preventDefault (.-srcEvent ev))
+                                                         (.preventDefault ev)
                                                          (dispatch [:cornelius-reader.events/previous-page])))
                              (.on @hammer "swipeleft" (fn [ev]
-                                                         (.preventDefault (.-srcEvent ev))
+                                                        (.preventDefault ev)
                                                          (dispatch [:cornelius-reader.events/following-page]))))
       :reagent-render (fn [displayed image-url-beginning]
                         [:img.page (-> {:src (str image-url-beginning "-2018.jpg") ;; TODO abstract this as it is used elsewhere
